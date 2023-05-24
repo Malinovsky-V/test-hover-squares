@@ -1,0 +1,8 @@
+.cube {
+  background-color: white;
+  border: 0.2px solid #000000;
+  flex: 1;
+}
+.selected {
+  background-color: #57b3ff;
+}
