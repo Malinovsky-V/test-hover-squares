@@ -1,20 +1,16 @@
-import { useState } from 'react';
 import styles from './Cube.module.css';
 
 type CubeProps = {
+  isSelected: boolean;
   cubePosition: string;
   selectedCubsHandler: (typeOfAction: string, cubePosition: string) => void;
 };
 
-const Cube = ({ cubePosition, selectedCubsHandler }: CubeProps) => {
-  const [isSelected, setSelected] = useState(false);
-
+const Cube = ({ isSelected, cubePosition, selectedCubsHandler }: CubeProps) => {
   const handleMouseEnter = () => {
     if (!isSelected) {
-      setSelected(true);
       selectedCubsHandler('add', cubePosition);
     } else {
-      setSelected(false);
       selectedCubsHandler('delete', cubePosition);
     }
   };

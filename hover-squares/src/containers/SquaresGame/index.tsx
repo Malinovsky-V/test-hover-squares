@@ -26,6 +26,7 @@ export default function SquaresGame() {
   ]);
   const [gameStatus, setGameStatus] = useState(1);
   const [numberOfCubes, setNumberOfCubes] = useState(0);
+
   useEffect(() => {
     getModes().then((data) => {
       setAvailableModes((defaultData) => [...defaultData, ...data]);
@@ -57,8 +58,13 @@ export default function SquaresGame() {
     } else return;
   };
 
+  const clearAreaHandler = () => {
+    setSelectedCubes(new Set());
+  };
+
   const startTheGameHandler = () => {
     if (numberOfCubes) setGameStatus(3);
+    if (gameStatus === 3) clearAreaHandler();
   };
 
   return (
@@ -77,11 +83,14 @@ export default function SquaresGame() {
               )
             )}
           </select>
-          <button onClick={startTheGameHandler}>Start</button>
+          <button onClick={startTheGameHandler}>
+            {gameStatus !== 3 ? 'Start' : 'Clear'}
+          </button>
         </div>
         <div className={styles.squaresArea}>
           {numberOfCubes && gameStatus === 3 ? (
             <CubeField
+              selectedCubes={selectedCubes}
               selectedCubsHandler={selectedCubsHandler}
               rowsAndColmsCount={numberOfCubes}
             />
