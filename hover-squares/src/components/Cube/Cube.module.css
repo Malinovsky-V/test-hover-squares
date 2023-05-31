@@ -1,6 +1,6 @@
 .cube {
   background-color: white;
-  border: 0.2px solid #000000;
+  border: 0.1px solid #000000;
   flex: 1;
 }
 .selected {
