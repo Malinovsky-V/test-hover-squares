@@ -48,16 +48,13 @@ export default function SquaresGame() {
   };
 
   const selectTheLevelHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const str = e.target.value;
-    const matches = str.match(/\d+/);
-    if (matches) {
-      const numberOfCubes = parseInt(matches[0]);
-      setNumberOfCubes(numberOfCubes);
-      setGameStatus(2);
-      setSelectedCubes(new Set());
-    } else return;
+    const selectedIndex = e.target.selectedIndex;
+    const selectedOption = e.target[selectedIndex] as HTMLOptionElement;
+    const fields = selectedOption.dataset.fields;
+    if (fields) {
+      setNumberOfCubes(+fields);
+    }
   };
-
   const clearAreaHandler = () => {
     setSelectedCubes(new Set());
   };
@@ -79,7 +76,10 @@ export default function SquaresGame() {
                   {name}
                 </option>
               ) : (
-                <option key={id + name}>{`${name} (${field} squares)`}</option>
+                <option
+                  key={id + name}
+                  data-fields={field}
+                >{`${name} (${field} squares)`}</option>
               )
             )}
           </select>
